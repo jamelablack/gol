@@ -1,7 +1,8 @@
 require 'gol'
 
 describe 'Game of Life' do
-  let(:cell) { Cell.new(0,0) }
+  let(:world) { World.new }
+  let(:cell) { Cell.new(world) }
 
   context "cell lifecycle" do
     it "populates cell at (x,y)" do
@@ -10,6 +11,7 @@ describe 'Game of Life' do
       expect(live_cell).to be_instance_of (Cell)
       expect(live_cell.x).to eq (3)
       expect(live_cell.y).to eq (5)
+      expect(live_cell.world).to eq (cell.world)
     end
   end
 
