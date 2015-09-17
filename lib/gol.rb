@@ -7,12 +7,33 @@ class Cell
     @y = y
     world.cells << self
   end
+
   def neighbors
-    []
+    @neighbors = []
+    world.cells.each do |cell|
+    #Neighbor to the North
+      if self.x == cell.x && self.y == cell.y - 1
+        @neighbors << cell
+      end
+
+    #Neighbor to the Northeast
+      if self.x == cell.x - 1 && self.y == cell.y - 1
+        @neighbors << cell
+      end
+    end
+    @neighbors
   end
 
   def populate_at(x,y)
     Cell.new(world, x, y)
+  end
+
+  def die!
+    world.cells -= [self]
+  end
+
+  def dead?
+    !world.cells.include?(self)
   end
 end
 
@@ -21,5 +42,13 @@ class World
   attr_accessor :cells
   def initialize
     @cells = []
+  end
+
+  def tick!
+    cells.each do |cell|
+      if cell.neighbors.count < 2
+        cell.die!
+      end
+    end
   end
 end
