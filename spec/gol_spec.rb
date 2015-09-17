@@ -53,4 +53,13 @@ describe 'Game of Life' do
     expect(cell).to be_alive
   end
 
+  it "Rule #3: Any live cell with more than three live neighbours dies, as if by overcrowding"do
+    neighbor1 = cell.populate_at(1,0)
+    neighbor2 = cell.populate_at(-1,0)
+    neighbor3 = cell.populate_at(1,1)
+
+    world.tick!
+    expect(cell).to be_dead
+  end
+
 end

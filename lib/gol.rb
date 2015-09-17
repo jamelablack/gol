@@ -63,6 +63,9 @@ class World
       if cell.neighbors.count < 2
         cell.die!
       end
+      if cell.neighbors.count >= 3
+        cell.die!
+      end
     end
   end
 end
