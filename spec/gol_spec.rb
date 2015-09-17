@@ -38,6 +38,11 @@ describe 'Game of Life' do
       cell.die!
       expect(world.cells).to_not include(self)
     end
+
+    it "resurects" do
+      cell.resurect!
+      expect(world.cells).to include(self)
+    end
   end
 
   it "Rule #1: Any cell with fewer than 2 live neighbors, dies" do
@@ -57,9 +62,18 @@ describe 'Game of Life' do
     neighbor1 = cell.populate_at(1,0)
     neighbor2 = cell.populate_at(-1,0)
     neighbor3 = cell.populate_at(1,1)
+    neighbor4 = cell.populate_at(0,1)
 
     world.tick!
     expect(cell).to be_dead
   end
 
+  it "Rule #4:Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction" do
+    neighbor1 = cell.populate_at(1,0)
+    neighbor2 = cell.populate_at(-1,0)
+    neighbor3 = cell.populate_at(1,1)
+
+    world.tick!
+    expect(cell).to be_alive
+  end
 end

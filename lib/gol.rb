@@ -49,6 +49,10 @@ class Cell
   def alive?
     world.cells.include?(self)
   end
+
+  def resurect!
+    world.cells += [self]
+  end
 end
 
 class World
@@ -63,8 +67,11 @@ class World
       if cell.neighbors.count < 2
         cell.die!
       end
-      if cell.neighbors.count >= 3
+      if cell.neighbors.count > 3
         cell.die!
+      end
+      if cell.neighbors.count == 3 && cell.dead?
+        cell.resurect!
       end
     end
   end
