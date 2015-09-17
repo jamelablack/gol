@@ -20,6 +20,16 @@ class Cell
       if self.x == cell.x - 1 && self.y == cell.y - 1
         @neighbors << cell
       end
+
+    #Neighbor to the west
+      if self.x == cell.x + 1 && self.y == cell.y
+        @neighbors << cell
+      end
+
+    #Neighbor to the east
+      if self.x == cell.x - 1 && self.y == cell.y
+        @neighbors << cell
+      end
     end
     @neighbors
   end
@@ -34,6 +44,10 @@ class Cell
 
   def dead?
     !world.cells.include?(self)
+  end
+
+  def alive?
+    world.cells.include?(self)
   end
 end
 

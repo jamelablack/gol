@@ -24,6 +24,16 @@ describe 'Game of Life' do
       expect(cell.neighbors.count).to eq(1)
     end
 
+    it "detects a neighbor to the west of it" do
+      west_cell = cell.populate_at(-1,0)
+      expect(cell.neighbors.count).to eq(1)
+    end
+
+    it "detects a neighbor to the east of it" do
+      east_cell = cell.populate_at(1,0)
+      expect(cell.neighbors.count).to eq(1)
+    end
+
     it "dies" do
       cell.die!
       expect(world.cells).to_not include(self)
@@ -35,4 +45,12 @@ describe 'Game of Life' do
     world.tick!
     expect(cell).to be_dead
   end
+
+  it "Rule #2: Any cell with two or three live neighbors, lives on to the next generation" do
+    neighbor1 = cell.populate_at(1,0)
+    neighbor2 = cell.populate_at(-1,0)
+    world.tick!
+    expect(cell).to be_alive
+  end
+
 end
