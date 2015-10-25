@@ -24,6 +24,26 @@ describe 'Game of Life' do
       expect(cell.neighbors.count).to eq(1)
     end
 
+    it "detects a neighbor to the northwest of it" do
+        northwest_cell = cell.populate_at(-1,1)
+        expect(cell.neighbors.count).to eq(1)
+    end
+
+    it "detects a neighbor to the south of it" do
+       south_cell = cell.populate_at(0,-1)
+       expect(cell.neighbors.count).to eq(1)
+    end
+
+    it "detects a neighbor to the southeast of it" do
+      southeast_cell = cell.populate_at(1,-1)
+      expect(cell.neighbors.count).to eq(1)
+    end
+
+    it "detects a neighbor to the southwest of it" do
+        northwest_cell = cell.populate_at(-1,-1)
+        expect(cell.neighbors.count).to eq(1)
+    end
+
     it "detects a neighbor to the west of it" do
       west_cell = cell.populate_at(-1,0)
       expect(cell.neighbors.count).to eq(1)
@@ -68,11 +88,10 @@ describe 'Game of Life' do
     expect(cell).to be_dead
   end
 
-  it "Rule #4:Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction" do
+  it "Rule #4: Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction" do
     neighbor1 = cell.populate_at(1,0)
     neighbor2 = cell.populate_at(-1,0)
-    neighbor3 = cell.populate_at(1,1)
-
+    neighbor3 = cell.populate_at(0,1)
     world.tick!
     expect(cell).to be_alive
   end

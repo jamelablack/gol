@@ -21,6 +21,26 @@ class Cell
         @neighbors << cell
       end
 
+    #Neighbor to the Northwest
+      if self.x == cell.x + 1 && self.y == cell.y - 1
+        @neighbors << cell
+      end
+
+    #Neighbor to the South
+      if self.x == cell.x && self.y == cell.y + 1
+        @neighbors << cell
+      end
+
+    #Neighbor to the Southeast
+      if self.x == cell.x - 1 && self.y == cell.y + 1
+        @neighbors << cell
+      end
+
+   #Neighbor to the Southwest
+      if self.x  == cell.x + 1 && self.y == cell.y + 1
+        @neighbors << cell
+      end
+
     #Neighbor to the west
       if self.x == cell.x + 1 && self.y == cell.y
         @neighbors << cell
@@ -51,7 +71,7 @@ class Cell
   end
 
   def resurect!
-    world.cells += [self]
+    world.cells << self
   end
 end
 
